@@ -16,5 +16,19 @@
 
             </field>
         </record>
+        <record id="product_template_tree_view" model="ir.ui.view">
+
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+
+                <field name="type" position="after">
+                    <field name="mx_calories"/>
+                    <field name="mx_protain"/>
+                    <field name="mx_text"/>
+                </field>
+
+            </field>
+        </record>
     </data>
 </odoo>
