@@ -12,6 +12,7 @@
                     <field name="mx_calories"/>
                     <field name="mx_protain"/>
                     <field name="mx_text"/>
+                    <!--field name="mx_dietitem"/-->
                 </field>
 
             </field>
@@ -26,9 +27,58 @@
                     <field name="mx_calories"/>
                     <field name="mx_protain"/>
                     <field name="mx_text"/>
+                    <!--field name="mx_dietitem"/-->
                 </field>
 
             </field>
         </record>
+        <!-- this is the menu for the inherited model -->
+        <record id="product_template_action_dietfact" model="ir.actions.act_window">
+            <field name="name">Diet Item</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.sale_menu_root"/>
+            <field name="context">{"search_default_filter_to_sell":1}</field>
+            <field name="domain">[('categ_id.name','=','Diet Item')]</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new Product
+                </p>
+                <p>
+                    ******************
+                </p>
+            </field>
+
+        </record>
+        <menuitem id="menu_product_template_action_dietfact" name="Mx_Diet_Item" parent="sale.sale_menu_root" action="product_template_action_dietfact" sequence="10"/>
+
+        <record id="mx_res_users_dietfact" model="ir.actions.act_window">
+            <field name="name">Users Menu</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mx.res.users</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="view_type">form</field>
+            <field name="view_id" ref="sale.product_menu_catalog"/>
+
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Click to define a new Menu
+                </p>
+
+            </field>
+
+        </record>
+        <menuitem id="menu_mx_res_users_dietfact"
+                  name="Users Menu"
+                  parent="sale.product_menu_catalog"
+                  action="mx_res_users"
+                  sequence="15"/>
+
+        <!--this is the menu for the new model -->
+        
+
+
     </data>
 </odoo>
