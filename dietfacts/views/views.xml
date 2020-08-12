@@ -1,60 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="dietfacts.list">
-      <field name="name">Dietfacts list</field>
-      <field name="model">dietfacts.dietfacts</field>
-      <field name="arch" type="xml">
-        <tree>
-          <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
-        </tree>
-      </field>
-    </record>
-    -->
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="product_template_form_view" model="ir.ui.view">
 
-    <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="dietfacts.action_window">
-      <field name="name">Dietfacts window</field>
-      <field name="res_model">dietfacts.dietfacts</field>
-      <field name="view_mode">tree,form</field>
-    </record>
-    -->
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
 
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="dietfacts.action_server">
-      <field name="name">Dietfacts server</field>
-      <field name="model_id" ref="model_dietfacts_dietfacts"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
-    </record>
-    -->
+                <field name="list_price" position="after">
+                    <field name="mx_calories"/>
+                    <field name="mx_protain"/>
+                    <field name="mx_text"/>
+                </field>
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="Dietfacts" id="dietfacts.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="dietfacts.menu_1" parent="dietfacts.menu_root"/>
-    <menuitem name="Menu 2" id="dietfacts.menu_2" parent="dietfacts.menu_root"/>
-    -->
-    <!-- actions -->
-    <!--
-    <menuitem name="List" id="dietfacts.menu_1_list" parent="dietfacts.menu_1"
-              action="dietfacts.action_window"/>
-    <menuitem name="Server to list" id="dietfacts" parent="dietfacts.menu_2"
-              action="dietfacts.action_server"/>
-    -->
-  </data>
+            </field>
+        </record>
+    </data>
 </odoo>

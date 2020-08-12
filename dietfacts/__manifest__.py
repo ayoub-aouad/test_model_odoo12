@@ -19,12 +19,12 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    # any module necessary for this one to work correctly
-    'depends': ['base',"account", "product", "sale", "sale_stock", "stock", "stock_account",],
+    # any module necessary for this one to work correctl
+    'depends': ['base', "sale",],
 
     # always loaded
     'data': [
-        #'security/ir.model.access.csv',
+        'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
     ],
