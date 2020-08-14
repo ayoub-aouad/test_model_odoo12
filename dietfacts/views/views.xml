@@ -3,36 +3,94 @@
     <data>
         <!-- Inherit Form View to Modify it -->
         <record id="product_template_form_view" model="ir.ui.view">
-
-            <field name="model">product.template</field>
+            <field name="name">product.template.inherit</field>
+            <field name="res_model">product.template</field>
+            <field name="model">product.mx</field>
             <field name="inherit_id" ref="product.product_template_only_form_view"/>
             <field name="arch" type="xml">
 
-                <field name="list_price" position="after">
-                    <field name="mx_calories"/>
-                    <field name="mx_protain"/>
-                    <field name="mx_text"/>
-                    <!--field name="mx_dietitem"/-->
+                <field name="type" position="after">
+                    <form >
+                        <field name="mx_calories"/>
+                        <field name="mx_protain"/>
+                        <field name="mx_text"/>
+                        <field name="mx_dietfact"/>
+                    </form>
                 </field>
 
             </field>
         </record>
         <record id="product_template_tree_view" model="ir.ui.view">
-
-            <field name="model">product.template</field>
+            <field name="name">product.template.inherit</field>
+            <field name="res_model">product.template</field>
+            <field name="model">product.mx</field>
             <field name="inherit_id" ref="product.product_template_tree_view"/>
             <field name="arch" type="xml">
 
                 <field name="type" position="after">
+                    
                     <field name="mx_calories"/>
                     <field name="mx_protain"/>
                     <field name="mx_text"/>
-                    <!--field name="mx_dietitem"/-->
+                    <field name="mx_dietfact"/>
+                    
                 </field>
 
             </field>
         </record>
+        <record id="mx_menu_tree_view" model="ir.ui.view">
+            <field name="name">users.mx.tree</field>
+            <field name="model">users.mx</field>
+            <field name="view_id" ref="dietfacts.mx_res_dietfact"/>
+            <field name="arch" type="xml">
 
+                <tree string="Mx_dietfact">
+                    <field name="mx_name"/>
+                    <field name="mx_datetime"/>
+                    <field name="mx_users_ids"/>
+                    <field name="mx_comment"/>
+                    <field name="mx_items_ids"/>
+                </tree>
+
+            </field>
+        </record>
+        <record id="mx_menu_form_view" model="ir.ui.view">
+            <field name="name">users.mx.form</field>
+            <field name="model">users.mx</field>
+            <field name="arch" type="xml">
+
+                <form string="Mx_dietfact">
+                    <group>
+                        <group>
+                            <field name="mx_name"/>
+                            <field name="mx_datetime"/>
+                        </group>
+                        <group>
+                            <field name="mx_users_ids"/>
+                            <field name="mx_comment"/>
+                        </group>
+                        
+                    </group>
+                    
+                    <notebook>
+                        <page string="Info">
+                            <field name="mx_items_ids">
+                                <tree>
+                                    <field name="mx_item_id"/>
+                                    <field name="mx_serving"/>
+                                    <field name="mx_notes"/>
+                                    <!-- <field name="mx_calorie"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                
+                </form>
+
+            </field>
+        </record>
+        
+        
         <!-- this is the menu for the inherited model -->
         <record id="product_action_dietfact" model="ir.actions.act_window">
             <field name="name">DietItem</field>
@@ -56,14 +114,15 @@
 
 
         <record id="mx_res_dietfact" model="ir.actions.act_window">
-            <field name="name">Users Menu</field>
+            <field name="name">UsersMenu</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">res.users</field>
+            <field name="res_model">users.mx</field>
             <field name="view_mode">tree,form,kanban</field>
+            <field name="view_id" ref="sale.product_menu_catalog"/>
             <field name="view_type">form</field>
-            <field name="view_id" ref="dietfacts.menu_mx_res"/>
             
-           
+            
+        
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
                     Click to define a new Menu
@@ -73,18 +132,22 @@
 
         </record>
 
+    
         
-        
-         <menuitem id="menu_action_dietfact"
-                   name="Mx_Dietitem"
-                   parent="sale.sale_menu_root"
-                   action="product_action_dietfact"
-                   sequence="9"/>
+        <menuitem id="menu_action"
+                name="Mx_Product"
+                sequence="0"/>
+        <menuitem id="menu_mx_product"
+                name="Mx_Dietfact"
+                parent="menu_action"
+                action="product_action_dietfact"
+                sequence="0"/>
+
         <menuitem id="menu_mx_res"
-                  name="Mx_Menu"
-                  parent="base.next_id_9"
-                  action="mx_res_dietfact"
-                  sequence="12"/>
+                name="Mx_Menu"
+                parent="menu_action"
+                action="mx_res_dietfact"
+                sequence="1"/>
 
         <!--this is the menu for the new model -->
         
