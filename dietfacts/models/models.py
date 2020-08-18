@@ -2,20 +2,19 @@
 
 from odoo import models, fields, api
 
-class dietfacts_product_template(models.AbstractModel):#this module is an inherit model that add and modify in a existing model
+class dietfacts_product_template(models.Model):
     _name = 'product.mx'
     
-    _inherit = ["product.template"]
+    _inherit = "product.template"
     _description = "MX_inherit_MODEL1"
-    mx_calories = fields.Integer(string="Mx_Calories", required=True, )
-    mx_protain = fields.Float(string="Mx_Protain",  required=True, )
-    mx_text = fields.Text(string="Mx_Text",required=True,)
-    mx_dietfact = fields.Boolean(string="Mx Dietfact", )
+    mx_caloris = fields.Integer(string="Mx_Calories",)
+    mx_protain = fields.Float(string="Mx_Protain",)
+    mx_text = fields.Text(string="Mx_Text",)
+    mx_dietfact = fields.Boolean(string="Mx Dietfact",)
 
-class Mx_inherited_Model(models.AbstractModel):
-    _name = 'sale.mx'
-    _inherit = ['sale.order']
-    mx_text = fields.Text(string="Text",required=False, )
+class Mx_inherited_Model(models.Model):
+    _inherit = 'sale.order'
+    mx_text = fields.Text(string="Text",)
 
 class dietfacts_res_users_info(models.Model):
     _name = 'users.mx'
@@ -34,4 +33,4 @@ class dietfacts_res_users_items(models.Model):
     mx_item_id = fields.Many2one(comodel_name="product.template", string="Mx_item_id", required=False, )
     mx_serving = fields.Float(string="Mx_Servings", required=False)
     mx_notes = fields.Text(string="Mx_Notes", required=False, )
-    mx_calorie = fields.Text(string="Mx_Calories", required=False)
+    mx_calorie = fields.Text(related = 'mx_item_id.mx_calories',string="Mx_Calories",store=True,readonly = True)
